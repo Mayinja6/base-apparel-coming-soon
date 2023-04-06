@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./assets/images/favicon-32x32.png"
+		/>
+		<link rel="stylesheet" href="style.css" />
+		<title>Base Apparel coming soon page | Frontend Mentor</title>
+	</head>
+	<body>
+		<section id="coming_soon">
+			<div class="coming_soon-content">
+				<div class="content-wrapper">
+					<div class="logo">
+						<img src="./assets/images/logo.svg" alt="website_logo" />
+					</div>
+					<div class="mobile_img">
+						<img src="./assets/images/hero-mobile.jpg" alt="mobile_img" />
+					</div>
+					<div class="info">
+						<h1 class="title"><span>We're</span> coming soon</h1>
+						<p class="text">
+							Hello fellow shoppers! We're currently building our new fashion
+							store. Add your email below to stay up-to-date with announcements
+							and our launch deals.
+						</p>
+						<form class="contact_form">
+							<input type="text" placeholder="Email Address" />
+							<button type="submit">
+								<img src="./assets/images/icon-arrow.svg" alt="submit_btn" />
+							</button>
+							<img src="./assets/images/icon-error.svg" alt="error_img" />
+							<span class="error_message">Please provide a valid email.</span>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="coming_soon-image">
+				<!-- <img src="./assets/images/hero-desktop.jpg" alt="coming_soon_img" /> -->
+			</div>
+		</section>
+		<script>
+			let contactFormEl = document.querySelector('.contact_form');
+			let formInputEl = contactFormEl.querySelector('input');
+
+			formInputEl.addEventListener('keyup', function () {
+				let email_validator =
+					/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/;
+
+				if (formInputEl.value === '') {
+					return contactFormEl.classList.remove('error');
+				}
+
+				if (email_validator.test(formInputEl.value) === false) {
+					return contactFormEl.classList.add('error');
+				}
+				contactFormEl.classList.remove('error');
+			});
+
+			contactFormEl.addEventListener('submit', (e) => {
+				e.preventDefault();
+
+				if (
+					contactFormEl.classList.contains('error') ||
+					formInputEl.value === ''
+				) {
+					return;
+				}
+				let spanEl = document.querySelector('.error_message');
+				spanEl.innerHTML = 'You have been added to the Waiting list,';
+				spanEl.style.display = 'block';
+				spanEl.style.color = 'cadetblue';
+
+				setTimeout(() => {
+					window.location.reload();
+				}, 1500);
+			});
+		</script>
+	</body>
+</html>
